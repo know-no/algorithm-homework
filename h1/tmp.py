@@ -1,16 +1,4 @@
-'''
-1 0 1 1
-1 1 1 1
-1 1 1 0
 
-6
-
-给定一个矩形区域，每一个位置上都是1或0，求该矩阵中每一个位置上都是1的最大子矩形区域中的1的个数。
-
-
-
-
-'''
 
 import sys
 
@@ -23,9 +11,8 @@ for i in sys.stdin:
 for i in range(len(arrs[0])):
     for j in range(1, len(arrs)):
         arrs[j][i] = arrs[j - 1][i] + arrs[j][i] if arrs[j][i] != 0 else 0
-
 maximum = 0
-stack = []
+
 for line in arrs:
     stack = []
     l = [0 for i in range(len(line))]
