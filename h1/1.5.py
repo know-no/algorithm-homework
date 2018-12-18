@@ -14,7 +14,7 @@ import sys
 def fuck(arr , width , k):
     new_arr = arr[width[0] - 1:width[1]]
     fuck_quick(new_arr,0,len(new_arr) - 1)
-    print(new_arr)
+    print(new_arr[-k])
 
 def fuck_quick(arr,low,high):
     if low >= high :
@@ -23,24 +23,20 @@ def fuck_quick(arr,low,high):
     fuck_quick(arr,low,j-1)
     fuck_quick(arr,j+1,high)
 
-def fuck_partition(arr,low,high):
-    l = low + 1
-    h = high
 
+
+def fuck_partition(arr,low,high):
+    l = low
+    h = high
     comparable = arr[low]
-    while True:
-        while arr[l] < comparable:
-            if l == h:
-                break
-            l += 1
-        while arr[h] > comparable:
+    while l < h:
+        while arr[h] > comparable and l < h:
             h -= 1
-            if l == h:
-                break
-        if l >= h:
-            break
-        arr[l] , arr[h] = arr[h] ,arr[l]
-    arr[low],arr[h] = arr[h] ,arr[low]
+        arr[l] = arr[h]
+        while arr[l] <= comparable and l < h:
+            l += 1
+        arr[h] = arr[l]
+    arr[h] = comparable
     return h
 
 if __name__ == "__main__":
