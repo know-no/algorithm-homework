@@ -1,5 +1,7 @@
 .idea
 temp*
-tmp
+tmp*
 test*
 .vscode
+*.java
+.\*\tmp*
