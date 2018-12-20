@@ -30,18 +30,22 @@ def fuck_partition(arr,low,high):
     h = high
     comparable = arr[low]
     while l < h:
-        while arr[h] > comparable and l < h:
+        while arr[h] >= comparable and l < h:
             h -= 1
         arr[l] = arr[h]
         while arr[l] <= comparable and l < h:
             l += 1
         arr[h] = arr[l]
+    if(l > h):
+        print("l > h")
     arr[h] = comparable
     return h
 
 if __name__ == "__main__":
-    arr = [int(x) for x in sys.stdin.readline().strip().split(" ")]
-    width = [int(x) for x in sys.stdin.readline().strip().split(" ")]
-    k = int(sys.stdin.readline().strip())
-    # fuck_quick(arr,0,len(arr) - 1)
-    fuck(arr,width,k)
+    # arr = [int(x) for x in sys.stdin.readline().strip().split(" ")]
+    # width = [int(x) for x in sys.stdin.readline().strip().split(" ")]
+    # k = int(sys.stdin.readline().strip())
+    a = [5,2,6,5,8,9,0,8,7,5]
+    fuck_quick(a,0,len(a) - 1)
+    # fuck(arr,width,k)
+    print(a)
