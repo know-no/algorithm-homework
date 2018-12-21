@@ -13,3 +13,75 @@ Sample Input 1
 Sample Output 1
 48
 '''
+
+import sys
+
+arr_1 = [int(x) for x in sys.stdin.readline().strip().split(" ")]
+
+arr_2 = [int(x) for x in sys.stdin.readline().strip().split(" ")]
+
+s = arr_1 + arr_2
+a = []
+b = []
+f = True
+while( len(s) != 0):
+    cha = sys.maxsize
+    index = 0
+    for j in range(1,len(s)):
+        if abs(s[0] -s[j]) < cha:
+            cha = abs(s[0]-s[j])
+            index = j
+    if s[0] > s[index]:
+        maximum , minimum = s[0],s[index]  
+    else:
+        maximum , minimum = s[index],s[0]
+    if f:
+        a.append(maximum)
+        b.append(minimum)
+        s = s[1:index] + s[index + 1:]
+    else:
+        b.append(maximum)
+        a.append(minimum)
+        s = s[1:index] + s[index + 1:]
+    f = not f
+
+print(a)
+print(b)
+            
+import sys
+a=[int(x) for x in sys.stdin.readline().strip().split(" ")]
+b=[int(x) for x in sys.stdin.readline().strip().split(" ")]
+length=len(a)
+f=True
+while f==True:
+    sum_a=sum(a)
+    sum_b=sum(b)
+    A=sum_a -sum_b
+    diff=sys.maxsize
+    if A>=0:
+        m,n=-1,-1
+        for i in range(length):
+            for j in range(length):
+                x=a[i]-b[j]
+                if 0<x<A and diff>abs(x-A/2):
+                    diff=abs(x-A/2)
+                    m,n=i,j
+        if m==-1:
+            f=False
+        else:
+            a[m],b[n]=b[n],a[m]
+    if A<0:
+        m,n=-1,-1
+        for i in range(length):
+            for j in range(length):
+                x=a[i]-b[j]
+                if A<x<0 and diff>abs(x-A/2):
+                    f=True
+                    diff=abs(x-A/2)
+                    m,n=i,j
+        if m==-1:
+            f=False
+        else:
+            a[m],b[n]=b[n],a[m]
+res=sum(a)-sum(b)
+print(abs(res))
