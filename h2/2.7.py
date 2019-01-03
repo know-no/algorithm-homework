@@ -1,21 +1,22 @@
 '''
 非递归的快排的实现
 '''
-
 import sys
-
 def quick_sort(length, nums):
-    
-    for i in [pow(2,x) for x in range(length)]:
-
-        for j in range(0,length,i):
-            sort_partition(nums, j, j + i- 1)
-
-    print(nums)
-
-        
-
-
+    stack = []
+    stack.append(0)
+    stack.append(length - 1)
+    while(len(stack) != 0):
+        hi = stack.pop(-1)
+        lo = stack.pop(0)
+        mid = sort_partition(nums,lo,hi)
+        if mid - 1 > lo:
+            stack.insert(0,lo)
+            stack.append(mid - 1)
+        if mid + 1 < hi: 
+            stack.insert(0,mid + 1)
+            stack.append(hi)
+    return nums
 
 def sort_partition(arr,low,high):
     l = low
@@ -35,8 +36,8 @@ def sort_partition(arr,low,high):
         arr[h] = arr[l]
     # 跳出此循环，则 l >= h, 其实是l == h ，
     # 下面的是arr[l]  return l 也可以 
-    if(l > h):
-        print("l > h")
+#    if(l > h):
+ #       print("l > h")
     arr[h] = comparable
     return h
 
@@ -46,5 +47,7 @@ if __name__ == "__main__":
     for x in sys.stdin:
         tmp = [int(i) for i in x.strip().split(" ")]
         tmp = quick_sort(tmp[0], tmp[1:])
+        ans = ""
         for i in tmp:
-            print(i,end=" ")
+            ans = ans + str(i) + " "
+        print(ans.strip())
